@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.LinkedList;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     private final LinkedList<String> mWordList = new LinkedList<>();
@@ -73,11 +74,15 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+//noinspection SimplifiableIfStatement
+        if (id == R.id.action_reset) {
+            mWordList.clear();
+            for (int i = 1; i < 21; i++){
+                mWordList.add("Word " + i);
+            }
+            Objects.requireNonNull(mRecyclerView.getAdapter()).notifyDataSetChanged();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
